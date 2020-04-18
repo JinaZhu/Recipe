@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const APP_ID = "9a33db56";
   const APP_KEY = "20afb677ae19a5226f7c2c88e8413be1";
-  const exampleReq = `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`;
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
+
+  const getRecipes = async () => {
+    // add await every time you have a promise
+    const response = await fetch(
+      `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
+    const data = await response.json();
+    console.log(data.hits);
+  };
 
   return (
     <div className="App">
